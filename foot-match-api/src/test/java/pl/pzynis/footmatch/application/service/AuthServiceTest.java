@@ -171,7 +171,7 @@ class AuthServiceTest {
         }
 
         @Test
-        @DisplayName("powinien rzucić wyjątek gdy użytkownik nie istnieje")
+        @DisplayName("powinien rzucić wyjątek gdy użytkownik nie jest zarejestowany")
         void shouldThrowWhenUserNotFound() {
             // given
             LoginRequest request = new LoginRequest(EMAIL, PASSWORD);
