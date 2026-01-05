@@ -16,9 +16,7 @@ const mockMatch: Match = {
   status: 'OPEN',
   organizer: {
     id: 'org-1',
-    name: 'Jan Kowalski',
-    email: 'jan@example.com',
-    role: 'ORGANIZER',
+    name: 'Jan Kowalski'
   },
   createdAt: '2026-01-01T10:00:00',
   updatedAt: '2026-01-01T10:00:00',
