@@ -19,7 +19,6 @@ const mockMatch: Match = {
     name: 'Jan Kowalski'
   },
   createdAt: '2026-01-01T10:00:00',
-  updatedAt: '2026-01-01T10:00:00',
 };
 
 describe('MatchCard - testy z perspektywy uzytkownika', () => {
