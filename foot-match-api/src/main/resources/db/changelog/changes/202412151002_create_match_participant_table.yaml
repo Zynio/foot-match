@@ -1,0 +1,67 @@
+databaseChangeLog:
+  - changeSet:
+      id: 202412151002_create_match_participant_table
+      author: claude-code
+      changes:
+        - createTable:
+            tableName: match_participant
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  defaultValueComputed: gen_random_uuid()
+              - column:
+                  name: match_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: player_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+                  defaultValue: 'PENDING'
+              - column:
+                  name: joined_at
+                  type: timestamptz
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+        - addForeignKeyConstraint:
+            baseTableName: match_participant
+            baseColumnNames: match_id
+            referencedTableName: match
+            referencedColumnNames: id
+            constraintName: fk_match_participant_match
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseTableName: match_participant
+            baseColumnNames: player_id
+            referencedTableName: app_user
+            referencedColumnNames: id
+            constraintName: fk_match_participant_app_user
+            onDelete: CASCADE
+        - addUniqueConstraint:
+            tableName: match_participant
+            columnNames: match_id, player_id
+            constraintName: uq_match_participant_match_player
+      rollback:
+        - dropUniqueConstraint:
+            tableName: match_participant
+            constraintName: uq_match_participant_match_player
+        - dropForeignKeyConstraint:
+            baseTableName: match_participant
+            constraintName: fk_match_participant_app_user
+        - dropForeignKeyConstraint:
+            baseTableName: match_participant
+            constraintName: fk_match_participant_match
+        - dropTable:
+            tableName: match_participant

@@ -1,0 +1,71 @@
+databaseChangeLog:
+  - changeSet:
+      id: 202412151001_create_match_table
+      author: claude-code
+      changes:
+        - createTable:
+            tableName: match
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                  defaultValueComputed: gen_random_uuid()
+              - column:
+                  name: organizer_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: location
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: match_date
+                  type: timestamptz
+                  constraints:
+                    nullable: false
+              - column:
+                  name: max_players
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+                  defaultValue: 'OPEN'
+              - column:
+                  name: created_at
+                  type: timestamptz
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+              - column:
+                  name: updated_at
+                  type: timestamptz
+        - addForeignKeyConstraint:
+            baseTableName: match
+            baseColumnNames: organizer_id
+            referencedTableName: app_user
+            referencedColumnNames: id
+            constraintName: fk_match_app_user
+            onDelete: CASCADE
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: match
+            constraintName: fk_match_app_user
+        - dropTable:
+            tableName: match

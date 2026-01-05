@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: changes/202412151000_create_app_user_table.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changes/202412151001_create_match_table.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changes/202412151002_create_match_participant_table.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changes/202412151003_create_indexes.yaml
+      relativeToChangelogFile: true

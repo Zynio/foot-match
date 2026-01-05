@@ -1,0 +1,47 @@
+version: 2
+updates:
+  # Frontend - npm dependencies
+  - package-ecosystem: "npm"
+    directory: "/foot-match-app"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "frontend"
+    groups:
+      expo:
+        patterns:
+          - "expo*"
+          - "@expo/*"
+      react:
+        patterns:
+          - "react*"
+          - "@react-*"
+
+  # Backend - Maven dependencies
+  - package-ecosystem: "maven"
+    directory: "/foot-match-api"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "backend"
+    groups:
+      spring:
+        patterns:
+          - "org.springframework*"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "ci"
